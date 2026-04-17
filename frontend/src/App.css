@@ -1,0 +1,421 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #0f1623;
+  color: #e0e6f0;
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+}
+
+/* ── TOP HEADER ─────────────────────────────────── */
+.kiosk-header {
+  width: 100%;
+  padding: 18px 40px;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.kiosk-header h1 {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: #8ca0bc;
+  text-transform: uppercase;
+}
+
+.kiosk-header .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22d3a0;
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
+}
+
+/* ── MAIN LAYOUT ─────────────────────────────────── */
+.kiosk-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 20px;
+  padding: 20px;
+  min-height: calc(100vh - 61px);
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* ── LEFT PANEL (CAMERA) ─────────────────────────── */
+.camera-panel {
+  background: #141b2d;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.camera-panel__feed {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 400px;
+}
+
+.camera-panel__feed canvas {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto;
+  border-radius: 0;
+  border: none !important;
+  display: block;
+}
+
+.camera-panel__footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.camera-footer__section {
+  padding: 16px 20px;
+  border-right: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.camera-footer__section:last-child {
+  border-right: none;
+}
+
+.camera-footer__label {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #4a5c78;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* ── STATUS / GESTURE DISPLAY ────────────────────── */
+.detected-gesture {
+  font-size: 28px;
+  font-weight: 700;
+  color: #22d3a0;
+  letter-spacing: 0.04em;
+}
+
+.detected-sentence {
+  font-size: 13px;
+  color: #8ca0bc;
+  margin-top: 4px;
+  font-style: italic;
+}
+
+.confidence-bar {
+  margin-top: 8px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.07);
+  overflow: hidden;
+}
+
+.confidence-bar__fill {
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #22d3a0, #3b82f6);
+  transition: width 0.5s ease;
+}
+
+/* ── SOURCE BADGE ───────────────────────────────── */
+.source-badge {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.source-badge--model {
+  background: rgba(99, 102, 241, 0.15);
+  color: #818cf8;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.source-badge--rules {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+/* ── GESTURE IMAGE PREVIEW ───────────────────────── */
+.gesture-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gesture-preview img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 12px rgba(34, 211, 160, 0.3));
+  transition: all 0.4s ease;
+}
+
+.gesture-preview .no-gesture {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px dashed rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2a3a52;
+  font-size: 28px;
+}
+
+/* ── RIGHT PANEL ─────────────────────────────────── */
+.side-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.side-card {
+  background: #141b2d;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.side-card__title {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #22d3a0;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+/* ── RECORD BUTTON ───────────────────────────────── */
+.record-btn {
+  width: 100%;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.04em;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.record-btn--ready {
+  background: #22d3a0;
+  color: #0a1120;
+}
+
+.record-btn--ready:hover {
+  background: #1dbf91;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(34, 211, 160, 0.35);
+}
+
+.record-btn--recording {
+  background: #ef4444;
+  color: #fff;
+  animation: recording-pulse 1.5s infinite;
+}
+
+@keyframes recording-pulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+  }
+}
+
+.record-btn--disabled {
+  background: #1e2d42;
+  color: #3a4f6a;
+  cursor: not-allowed;
+}
+
+.record-btn--disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* ── STATUS TEXT ─────────────────────────────────── */
+.status-text {
+  font-size: 12px;
+  text-align: center;
+  margin-top: 8px;
+  height: 18px;
+}
+
+.status-text--ready {
+  color: #22d3a0;
+}
+
+.status-text--loading {
+  color: #f59e0b;
+}
+
+.status-text--recording {
+  color: #ef4444;
+}
+
+/* ── PAYLOAD (LIVE DATA) ─────────────────────────── */
+.payload-box {
+  background: #0c1220;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 14px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  color: #4a9c7e;
+  line-height: 1.7;
+  max-height: 160px;
+  overflow-y: auto;
+  word-break: break-all;
+}
+
+.payload-box::-webkit-scrollbar {
+  width: 4px;
+}
+
+.payload-box::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.payload-box::-webkit-scrollbar-thumb {
+  background: #1e3a52;
+  border-radius: 2px;
+}
+
+/* ── SIGN LEGEND ─────────────────────────────────── */
+.sign-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.sign-pill {
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #0c1220;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 11px;
+  color: #6a84a4;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.sign-pill.active {
+  border-color: #22d3a0;
+  background: rgba(34, 211, 160, 0.08);
+  color: #22d3a0;
+  box-shadow: 0 0 12px rgba(34, 211, 160, 0.12);
+}
+
+.sign-pill__emoji {
+  font-size: 15px;
+}
+
+.sign-pill__name {
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+/* ── EMERGENCY MODE ─────────────────────────── */
+
+.emergency-card {
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.emergency-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.emergency-grid button {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #ef4444;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.emergency-grid button:hover {
+  background: #dc2626;
+  transform: scale(1.03);
+}
+
+.emergency-alert {
+  margin-top: 12px;
+  padding: 10px;
+  border-radius: 8px;
+  background: #ef4444;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  animation: emergency-blink 1s infinite;
+}
+
+@keyframes emergency-blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
